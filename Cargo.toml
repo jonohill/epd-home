@@ -1,0 +1,7 @@
+[workspace]
+members = [
+    "epd-home",
+    "epd-home-cli",
+    "epd-home-cf"
+, "epd-home-web"]
+resolver = "2"

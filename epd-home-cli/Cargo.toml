@@ -1,0 +1,12 @@
+[package]
+name = "epd-home-cli"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+anyhow = "1.0.81"
+env_logger = "0.11.3"
+epd-home = { path = "../epd-home" }
+tokio = { version = "1.37.0", features = ["macros", "rt-multi-thread"] }

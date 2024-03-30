@@ -1,0 +1,98 @@
+<svg viewBox="0 0 800 480" xmlns="http://www.w3.org/2000/svg">
+    <style>
+      .heavy {
+        font: bold 108px 'Chivo Mono';
+        dominant-baseline: text-before-edge;
+      }
+      
+      .big {
+        font: 108px 'Chivo Mono';
+        dominant-baseline: text-before-edge;
+      }
+      
+      .half {
+        font: 48px 'Chivo Mono';
+        dominant-baseline: text-before-edge;
+      }
+      
+      .quarter {
+        font: 24px 'Chivo Mono';
+        dominant-baseline: text-before-edge;
+      }
+
+      .copy {
+        font-family: 'Chivo';
+      }
+    </style>
+
+    <!-- Current conditions -->
+    <image x="40" y="20" width="96" height="96" href="icons/{{ weather_now }}.svg" />
+    <text x="150" y="5" class="big">{{ temp_now }}°</text>
+    
+    <!-- Time -->
+    <text x="780" y="5" class="heavy" text-anchor="end">{{ time|formatdate("%l:%M") }}</text>
+    
+    <!-- Forecast -->
+
+    {% for data in forecast %}
+      {% let offset = 160 + loop.index0 * 80 %}
+      <text x="28" y="{{ offset + 10 }}" class="quarter">
+      {% match data.temp %}
+        {% when Some with (temp) %}
+          <!-- forecast -->
+          {{ data.time|formatdate("%l %P") }}
+        {% when None %}
+          <!-- sunrise/sunset -->
+          {{ data.time|formatdate("%l:%M") }}
+      {% endmatch %}
+      </text>
+      <image x="158" y="{{ offset }}" width="48" height="48" href="icons/{{ data.weather }}.svg" />
+      {% match data.temp %}
+        {% when Some with (temp) %}
+          <text x="218" y="{{ offset - 5 }}" class="half">{{ temp }}°</text>
+        {% when None %}
+      {% endmatch %}
+    {% endfor %}
+
+    <!-- vertical divider -->
+    <line x1="300" x2="300" y1="300" y2="600" />
+
+    <!-- Transport -->
+    {% for arrival in arrivals %}
+      {% let offset = 170 + loop.index0 * 80 %}
+      {% let outline_width = arrival.route.len() * 14 + 22 %}
+      {% if arrival.route.len() > 1 %}
+        <rect 
+          x="360" 
+          y="{{ offset - 4 }}" 
+          width="{{ outline_width }}" 
+          height="36"
+          rx="5"
+          ry="5"
+          fill="white"
+          stroke="black"
+          stroke-width="3"
+        />
+      {% else %}
+        <circle 
+          cx="378" 
+          cy="{{ offset + 14 }}" 
+          r="{{ outline_width / 2 }}"
+          fill="white"
+          stroke="black"
+          stroke-width="3"
+        />
+      {% endif %}
+      <text x="370" y="{{ offset }}" class="quarter">
+        {{ arrival.route }}
+      </text>
+      <text x="450" y="{{ offset }}" class="quarter copy">
+        {{ arrival.headsign|titlecase }}
+      </text>
+      <text x="780" y="{{ offset }}" class="quarter" text-anchor="end">
+        <!-- needs to be in one long line to ensure no whitespace -->
+        {% for time in arrival.arrival_times %}{% if !loop.first %}, {% endif %}{% match time %}{% when ArrivalTime::Now %}Now{% when ArrivalTime::Minutes with (mins) %}{{ mins }}{% when ArrivalTime::Time with (dt) %}{{ dt|formatdate("%l:%M%P") }}{% endmatch %}{% endfor %}
+      </text>
+    {% endfor %}
+
+  </svg>

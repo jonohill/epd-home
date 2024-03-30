@@ -1,0 +1,24 @@
+[package]
+name = "epd-home"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+askama = "0.12.1"
+bmp-monochrome = "1.1.0"
+chrono = { version = "0.4.35", features = ["now"] }
+chrono-tz = "0.8.6"
+fontdb = { version = "0.16.2", default-features = false }
+itertools = "0.12.1"
+log = "0.4.21"
+reqwest = { version = "0.12.2", default-features = false, features = ["json", "rustls-tls"] }
+resvg = "0.40.0"
+serde = { version = "1.0.197", features = ["derive"] }
+serde_json = "1.0.115"
+thiserror = "1.0.58"
+tiny-skia = "0.11.4"
+titlecase = "2.2.1"
+tokio = { version = "1.37.0", features = ["macros"] }
+usvg = "0.40.0"

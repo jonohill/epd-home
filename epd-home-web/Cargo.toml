@@ -1,0 +1,12 @@
+[package]
+name = "epd-home-web"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+actix-web = "4.5.1"
+epd-home = { path = "../epd-home" }
+serde = { version = "1.0.197", features = ["derive"] }
+thiserror = "1.0.58"
