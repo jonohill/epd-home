@@ -1,0 +1,20 @@
+[package]
+name = "epd-home-cf"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+worker = "0.0.24"
+epd-home = { path = "../epd-home" }
+console_error_panic_hook = "0.1.7"
+console_log = "1.0.0"
+log = "0.4.21"
+
+[profile.release]
+opt-level = "s" # optimize for size in release builds
+lto = true
+strip = true
+codegen-units = 1
