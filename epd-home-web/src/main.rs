@@ -28,7 +28,7 @@ impl ResponseError for Error {
 
 type Result<T, E = Error> = std::result::Result<T, E>;
 
-#[post("/ok")]
+#[get("/ok")]
 async fn ok() -> impl Responder {
     HttpResponse::Ok()
 }
