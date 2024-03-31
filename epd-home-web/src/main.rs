@@ -1,4 +1,4 @@
-use std::io::Cursor;
+use std::{env, io::Cursor};
 
 use actix_web::{get, middleware, post, web, App, HttpResponse, HttpServer, Responder, ResponseError};
 use epd_home::screen::{self, Screen};
@@ -58,13 +58,15 @@ async fn get_home_screen(options: web::Query<HomeScreenOptions>) -> Result<impl 
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
+    let listen_address = env::var("LISTEN_ADDRESS").unwrap_or("127.0.0.1:8080".to_string());
+
     HttpServer::new(|| {
         App::new()
             .wrap(middleware::Compress::default())
             .service(ok)
             .service(get_home_screen)
     })
-    .bind(("0.0.0.0", 8080))?
+    .bind(listen_address)?
     .run()
     .await
 }
