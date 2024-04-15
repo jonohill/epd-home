@@ -7,6 +7,10 @@ edition = "2021"
 
 [dependencies]
 actix-web = "4.5.1"
+bmp-monochrome = "1.1.0"
+env_logger = "0.11.3"
 epd-home = { path = "../epd-home" }
+image = { version = "0.25.1", default-features = false, features = ["qoi"] }
+log = "0.4.21"
 serde = { version = "1.0.197", features = ["derive"] }
 thiserror = "1.0.58"

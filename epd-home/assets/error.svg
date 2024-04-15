@@ -1,0 +1,32 @@
+<svg viewBox="0 0 800 480" xmlns="http://www.w3.org/2000/svg">
+    <style>
+      .heavy {
+        font: bold 108px 'Chivo Mono';
+        dominant-baseline: text-before-edge;
+      }
+      
+      .big {
+        font: 108px 'Chivo Mono';
+        dominant-baseline: text-before-edge;
+      }
+      
+      .half {
+        font: 48px 'Chivo Mono';
+        dominant-baseline: text-before-edge;
+      }
+      
+      .quarter {
+        font: 24px 'Chivo Mono';
+        dominant-baseline: text-before-edge;
+      }
+
+      .copy {
+        font-family: 'Chivo';
+      }
+    </style>
+
+    <image x="320" y="100" width="150" height="150" href="icons/wifi-off.svg" />
+
+    <text x="130" y="280" class="half">epd.heaps.dev/setup</text>
+
+</svg>
