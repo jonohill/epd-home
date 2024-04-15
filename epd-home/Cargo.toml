@@ -7,7 +7,7 @@ edition = "2021"
 
 [dependencies]
 askama = "0.12.1"
-chrono = { version = "0.4.37", features = ["now"] }
+chrono = { version = "0.4.38", features = ["now"] }
 chrono-tz = "0.8.6"
 fontdb = { version = "0.16.2", default-features = false }
 futures = "0.3.30"
