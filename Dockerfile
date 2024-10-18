@@ -1,4 +1,4 @@
-FROM --platform=$BUILDPLATFORM rust:1.76.0 AS build
+FROM --platform=$BUILDPLATFORM rust:1.82.0 AS build
 
 ARG TARGETPLATFORM
 ARG BUILDPLATFORM
@@ -30,7 +30,7 @@ RUN cd epd-home-web && \
     cargo zigbuild --target "$(cat /target)" --release && \
     cp "../target/$(cat /target)/release/epd-home-web" /epd-home-web
 
-FROM rust:1.76.0 AS build-native
+FROM rust:1.82.0 AS build-native
 
 COPY --from=0 /epd-home-web /epd-home-web
 RUN strip /epd-home-web
